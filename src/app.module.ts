@@ -4,6 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseService } from './database.service';
 import { CategoryModule } from './features/category/category.module';
 import { Category } from './features/category/category.entity';
+import { AuthorModule } from './features/author/author.module';
+import { Author } from './features/author/author.entity';
 
 @Module({
   imports: [
@@ -20,11 +22,12 @@ import { Category } from './features/category/category.entity';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
-        entities: [Category],
+        entities: [Category, Author],
         synchronize: true,
       }),
     }),
     CategoryModule,
+    AuthorModule,
   ],
   providers: [DatabaseService],
 })
