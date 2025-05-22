@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseService } from './database.service';
@@ -20,14 +18,11 @@ import { DatabaseService } from './database.service';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
-        // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        // only used for database connection only
-        entities: [],
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, DatabaseService],
+  providers: [DatabaseService],
 })
 export class AppModule {}
