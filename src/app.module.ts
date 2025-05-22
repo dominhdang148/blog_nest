@@ -19,8 +19,6 @@ import { DatabaseService } from './database.service';
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        // only used for database connection only
-        // entities: [],
         synchronize: true,
       }),
     }),
