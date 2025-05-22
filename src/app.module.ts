@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseService } from './database.service';
+import { CategoryModule } from './features/category/category.module';
+import { Category } from './features/category/category.entity';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { DatabaseService } from './database.service';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        entities: [Category],
         synchronize: true,
       }),
     }),
+    CategoryModule,
   ],
   providers: [DatabaseService],
 })
