@@ -6,6 +6,8 @@ import { CategoryModule } from './features/category/category.module';
 import { Category } from './features/category/category.entity';
 import { AuthorModule } from './features/author/author.module';
 import { Author } from './features/author/author.entity';
+import { TagModule } from './features/tag/tag.module';
+import { Tag } from './features/tag/tag.entity';
 
 @Module({
   imports: [
@@ -22,12 +24,13 @@ import { Author } from './features/author/author.entity';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
-        entities: [Category, Author],
+        entities: [Category, Author, Tag],
         synchronize: true,
       }),
     }),
     CategoryModule,
     AuthorModule,
+    TagModule,
   ],
   providers: [DatabaseService],
 })
