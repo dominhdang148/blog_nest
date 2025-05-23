@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tbl_author')
-export class Author {
+export class AuthorEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

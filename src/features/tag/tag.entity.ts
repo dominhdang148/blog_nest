@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tbl_tag')
-export class Tag {
+export class TagEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
