@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { PostEntity } from '../post/post.entity';
 
 @Entity('tbl_tag')
 export class TagEntity {
@@ -11,6 +12,7 @@ export class TagEntity {
     unique: true,
   })
   name: string;
+
   @Column({
     name: 'url_slug',
     nullable: false,

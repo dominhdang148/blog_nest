@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { PostEntity } from '../post/post.entity';
 
 @Entity('tbl_category')
 export class CategoryEntity {
@@ -30,4 +31,9 @@ export class CategoryEntity {
     name: 'show_on_menu',
   })
   showOnMenu: boolean;
+
+  // Relationships
+
+  @OneToMany(() => PostEntity, (post) => post.category, { cascade: true })
+  posts: PostEntity[];
 }
