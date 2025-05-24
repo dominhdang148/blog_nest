@@ -1,9 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseService } from './database.service';
+import { CategoryModule } from './features/category/category.module';
+import { AuthorModule } from './features/author/author.module';
+import { PostModule } from './features/post/post.module';
+import { TagModule } from './features/tag/tag.module';
+import { CategoryEntity } from './features/category/category.entity';
+import { AuthorEntity } from './features/author/author.entity';
+import { TagEntity } from './features/tag/tag.entity';
+import { PostEntity } from './features/post/post.entity';
 
 @Module({
   imports: [
@@ -20,14 +26,15 @@ import { DatabaseService } from './database.service';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
-        // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        // only used for database connection only
-        entities: [],
+        entities: [CategoryEntity, AuthorEntity, TagEntity, PostEntity],
         synchronize: true,
       }),
     }),
+    CategoryModule,
+    AuthorModule,
+    PostModule,
+    TagModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, DatabaseService],
+  providers: [DatabaseService],
 })
 export class AppModule {}
