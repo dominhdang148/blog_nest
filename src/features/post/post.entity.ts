@@ -1,10 +1,17 @@
+import { AuthorEntity } from '../author/author.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { CategoryEntity } from '../category/category.entity';
+import { TagEntity } from '../tag/tag.entity';
 
 @Entity('tbl_post')
 export class PostEntity {
@@ -73,4 +80,24 @@ export class PostEntity {
     type: 'timestamptz',
   })
   modifiedDate: Date;
+
+  // Relationships
+
+  @ManyToOne(() => AuthorEntity, (author) => author.posts, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'author_id' })
+  author: AuthorEntity;
+
+  @ManyToOne(() => CategoryEntity, (category) => category.posts, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'category_id' })
+  category: CategoryEntity;
+
+  @ManyToMany(() => TagEntity)
+  @JoinTable({
+    name: 'tbl_post_tag',
+    joinColumn: { name: 'post_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'id' },
+  })
+  tags: TagEntity[];
 }

@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { PostEntity } from '../post/post.entity';
 
 @Entity('tbl_author')
 export class AuthorEntity {
@@ -40,4 +41,9 @@ export class AuthorEntity {
     length: 500,
   })
   note: string;
+
+  // Relationships
+
+  @OneToMany(() => PostEntity, (post) => post.author, { cascade: true })
+  posts: PostEntity[];
 }
