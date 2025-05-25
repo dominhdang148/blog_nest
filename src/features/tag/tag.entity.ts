@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { PostEntity } from '../post/post.entity';
 
 @Entity('tbl_tag')
 export class TagEntity {
