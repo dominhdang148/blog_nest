@@ -6,29 +6,15 @@ import { CategoryModule } from './features/category/category.module';
 import { AuthorModule } from './features/author/author.module';
 import { PostModule } from './features/post/post.module';
 import { TagModule } from './features/tag/tag.module';
-import { CategoryEntity } from './features/category/category.entity';
-import { AuthorEntity } from './features/author/author.entity';
-import { TagEntity } from './features/tag/tag.entity';
-import { PostEntity } from './features/post/post.entity';
+import { typeOrmConfig } from './config/typeorm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        host: config.get('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
-        username: config.get('DB_USERNAME'),
-        password: config.get('DB_PASSWORD'),
-        database: config.get('DB_NAME'),
-        entities: [CategoryEntity, AuthorEntity, TagEntity, PostEntity],
-        synchronize: true,
-      }),
+      useFactory: typeOrmConfig,
     }),
     CategoryModule,
     AuthorModule,
