@@ -4,6 +4,6 @@ import { Pagination } from './pagination.model';
 export interface ApiResponse<Type> {
   message: string;
   status: HttpStatus;
-  data: Type | null;
+  data: Type;
   pagination: Pagination | null;
 }
